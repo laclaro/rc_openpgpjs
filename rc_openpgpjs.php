@@ -39,7 +39,7 @@ class rc_openpgpjs extends rcube_plugin {
     $this->register_action('plugin.hkp_add', array($this, 'hkp_add'));
     $this->register_action('plugin.pubkey_save', array($this, 'pubkey_save'));
 
-    if ($this->rc->task == 'mail') {
+    if ($this->rc->task == 'mail' || $this->rc->task == 'settings') {
       $this->add_hook('render_page', array($this, 'render_page'));
 
       // make localization available on the client
@@ -118,7 +118,9 @@ class rc_openpgpjs extends rcube_plugin {
             }
         }
       }
-    } elseif ($this->rc->task == 'settings') {
+    } 
+    
+    if ($this->rc->task == 'settings') {
       // load localization
       $this->add_texts('localization/', false);
 
@@ -341,6 +343,7 @@ class rc_openpgpjs extends rcube_plugin {
    * @return array Modified parameters
    */
   function preferences_list($p) {
+
     if (!get_input_value('_framed', RCUBE_INPUT_GPC) && $args['section'] == 'openpgp_prefs') {
         $p['blocks'][$args['section']]['options'] = array (
             'title'     => '',
@@ -350,6 +353,7 @@ class rc_openpgpjs extends rcube_plugin {
     }
 
     if ($p['section'] == 'openpgp_prefs') {
+
       $p['blocks']['openpgp']['name'] = $this->gettext('openpgp_options');
 
       if (!isset($no_override['openpgp_enabled'])) 
@@ -428,7 +432,21 @@ class rc_openpgpjs extends rcube_plugin {
         'content' => $sign->show($this->rc->config->get('sign', false)?1:0),
       );
 
+      $p['blocks']['keymanager'] = array (
+          'name' => Q($this->gettext('key_manager')),
+          'options' => array('keymanagerhandler' => array (
+              'content' => html::a(array(
+                  'href' => '#',
+                  'id' => 'keymanagerhandler',
+                  #'onclick' => "return rcmail.command('open-key-manager','',this,event)",
+                  #'onclick' => "alert('here')"
+                  'onclick' => '$("#openpgpjs_key_manager").dialog("open");'
+              ),
+              Q($this->gettext('key_manager'))),
+           )),
+      );
     }
+
 
     return $p;
   }
