@@ -56,6 +56,11 @@ class rc_openpgpjs extends rcube_plugin {
 
       // load css
       $this->include_stylesheet($this->local_skin_path() . '/rc_openpgpjs.css');
+    }
+
+    // For mail compose only settings
+    if ( $this->rc->task == 'mail' )
+    {
 
       // add public key attachment related hooks
       $this->add_hook('message_compose', array($this, 'message_compose'));
@@ -118,9 +123,7 @@ class rc_openpgpjs extends rcube_plugin {
             }
         }
       }
-    } 
-    
-    if ($this->rc->task == 'settings') {
+    } elseif ($this->rc->task == 'settings') {
       // load localization
       $this->add_texts('localization/', false);
 
@@ -438,9 +441,9 @@ class rc_openpgpjs extends rcube_plugin {
               'content' => html::a(array(
                   'href' => '#',
                   'id' => 'keymanagerhandler',
-                  #'onclick' => "return rcmail.command('open-key-manager','',this,event)",
+                  'onclick' => "return rcmail.command('open-key-manager','',this,event)",
                   #'onclick' => "alert('here')"
-                  'onclick' => '$("#openpgpjs_key_manager").dialog("open");'
+                  #'onclick' => '$("#openpgpjs_key_manager").dialog("open");'
               ),
               Q($this->gettext('key_manager'))),
            )),

@@ -8,7 +8,7 @@
     <div id='openpgpjs-tab1'>
       <table id='openpgpjs_pubkeys' class="records-table">
         <thead>
-          <tr class='boxtitle'>
+         <tr> <!-- class='boxtitle'>-->
             <td><roundcube:label name="rc_openpgpjs.key_id" /></td>
             <td><roundcube:label name="rc_openpgpjs.fingerprint" /></td>
             <td><roundcube:label name="rc_openpgpjs.person" /></td>
@@ -35,7 +35,7 @@
     <div id='openpgpjs-tab2'>
       <table id='openpgpjs_privkeys' class='records-table'>
         <thead>
-          <tr class='boxtitle'>
+         <tr> <!-- class='boxtitle'>-->
             <td><roundcube:label name="rc_openpgpjs.key_id" /></td>
             <td><roundcube:label name="rc_openpgpjs.fingerprint" /></td>
             <td><roundcube:label name="rc_openpgpjs.person" /></td>
@@ -66,9 +66,9 @@
           <span class="ui-icon ui-icon-alert"></span>
           <p></p>
         </div>
-        <label for="gen_ident"><roundcube:label name="rc_openpgpjs.ident" />:</label> <select id='gen_ident' /></select>
-        <label for="gen_passphrase"><roundcube:label name="rc_openpgpjs.passphrase" />:</label> <input type='password' id='gen_passphrase' /> 
-        <label for="gen_passphrase_verify"><roundcube:label name="rc_openpgpjs.verify" />:</label> <input type='password' id='gen_passphrase_verify' /> 
+        <label for="gen_ident"><roundcube:label name="rc_openpgpjs.ident" />:</label> <select id='gen_ident' /></select><br/>
+        <label for="gen_passphrase"><roundcube:label name="rc_openpgpjs.passphrase" />:</label> <input type='password' id='gen_passphrase' /><br/> 
+        <label for="gen_passphrase_verify"><roundcube:label name="rc_openpgpjs.verify" />:</label> <input type='password' id='gen_passphrase_verify' /> <br/>
         <label for="gen_bits"><roundcube:label name="rc_openpgpjs.bits" />:</label> 
         <select id='gen_bits'>
           <option value='2048'>2048</option>
